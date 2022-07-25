@@ -4,7 +4,9 @@ import Menu from "./pages/Menu"
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import data from "./data/data";
-import {  useState } from "react";
+import { useState } from "react";
+import Login from "./pages/Login";
+import Thankyou from "./pages/Thankyou";
 
 function App() {
   const products = data;
@@ -12,30 +14,41 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   
   const handleAddProduct = (product) =>{
-    console.log(cartItems);
-    
     const productExist =  cartItems.find((item) => item.id === product.id);
     if(productExist){
       setCartItems(cartItems.map((item) => 
         item.id === product.id? {...product, quantity: productExist.quantity + 1}: item)
         );
-        console.log("if statemen")
     }
      else{
           setCartItems([...cartItems, {...product, quantity: 1}]);
-          console.log("else statement")
     }
   }
-
+  
+  const removeItem = (product) =>{
+    const productExist =  cartItems.find((item) => item.id === product.id);
+    console.log(productExist)
+    if(productExist.quantity ===1){
+      setCartItems(cartItems.filter((item) => item.id !== product.id))
+    }else{
+      setCartItems(cartItems.map((item) =>
+        item.id === product.id ? {...productExist, quantity: productExist.quantity-1} : item
+      ));
+    }
+  } 
+  
   return (
     <div className="App">
-      <Header products={products}/>
+      <Header cartItems={cartItems}/>
       {/* <Home/> */}
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/menu" element={<Menu products={products} cartItems={cartItems} handleAddProduct= {handleAddProduct}/>}></Route>
-        <Route path="/checkout" element={<Checkout/>} cartItems={cartItems}></Route>
+        <Route path="/checkout" element={<Checkout cartItems={cartItems} handleAddProduct={handleAddProduct} removeItem={removeItem} setCartItems={setCartItems}/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/thankyou" element={<Thankyou setCartItems={setCartItems}/>}></Route>
       </Routes>
+
     </div>
   );
 }

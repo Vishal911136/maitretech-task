@@ -1,19 +1,14 @@
-import { createContext, useEffect, useState } from "react";
-// import { ImPriceTag } from "react-icons/im";
+import { useEffect } from "react";
 
-
-const Menu = ({products,handleAddProduct,cartItems}) =>{
-   
-   
-    const [quantity,setQuantity] = useState(cartItems);
-    const plusBtn = (product) =>{
-        console.log(cartItems)
-    }
-
+const Menu = ({products,handleAddProduct}) =>{
+    
+    useEffect(()=>{
+        console.log(products);
+    },[])
     return(
         <>
             <div className="menu_container">
-
+                <h1>Product</h1>
                 {
                     products.map((value) => {
                         return(
@@ -22,11 +17,8 @@ const Menu = ({products,handleAddProduct,cartItems}) =>{
                                 <div className="item_disc">
                                     <h1>{value.name}</h1>
                                     <p>Price : {value.price}</p>
-                                    <p>Total : {value.quantity}</p>
-                                    <p>Cost : {value.price * quantity}</p>
                                     <div className="item_inc_dec_btn">
-                                        <button onClick={() => {return(handleAddProduct(value), plusBtn(value))}} style={{background:'#3f51b5',color:'white'}}> + </button>
-                                        <button> - </button>
+                                        <button onClick={() => handleAddProduct(value)} style={{background:'#3f51b5',color:'white'}}> Add to Cart </button>
                                     </div>
                                 </div>
                             </div>
