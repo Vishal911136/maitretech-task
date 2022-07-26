@@ -34,7 +34,7 @@ const Checkout = ({cartItems, setCartItems, handleAddProduct, removeItem}) =>{
                                 <h4> {totalP} </h4>
                             </div>
                             <Link to="/thankyou"><button className="checkout_btn" onClick={() =>{
-                                setCartItems()
+                                setCartItems(0)
                             }}>Check Out</button></Link>
             </div>     
         </>

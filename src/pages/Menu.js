@@ -8,7 +8,6 @@ const Menu = ({products,handleAddProduct}) =>{
     return(
         <>
             <div className="menu_container">
-                <h1>Product</h1>
                 {
                     products.map((value) => {
                         return(

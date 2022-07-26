@@ -10,11 +10,11 @@ const Login = () =>{
 
                     <div className="input_field">
                         <span>Username</span>
-                        <input type="text" />
+                        <input type="text" required/>
                     </div>
                     <div className="input_field">
                         <span>Password</span>
-                        <input type="text" />
+                        <input type="text" required/>
                     </div><br />
                     <Link to="/"><button>Login</button></Link>
                 </form>
